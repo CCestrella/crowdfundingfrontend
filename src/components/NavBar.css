@@ -1,0 +1,44 @@
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    /* Navbar background */
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 70px;
+    /* Fix the height of the navbar */
+    overflow: hidden;
+}
+
+/* Logo Styling */
+.navbar-logo img {
+    width: 240px;
+    /* Adjust the logo width */
+    height: auto;
+    /* Maintain aspect ratio */
+    margin-bottom: 50px;
+}
+
+/* Links Styling */
+.navbar-links {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: black;
+    /* Adjust the color to match navbar theme */
+    font-size: 1rem;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav-link:hover {
+    background-color: #00507d;
+    color: aliceblue;
+}

@@ -1,0 +1,74 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.background-slideshow {
+    width: 100%;
+    height: 105vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    /* Ensures the entire image is visible */
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 800px;
+    z-index: -1;
+    /* Ensure it is behind other content */
+    overflow: hidden;
+    /* Ensure the slideshow doesn't overflow */
+}
+
+.slideshow-content {
+    background-color: rgba(80, 82, 80, 0.5);
+    /* Overlay for better text readability */
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 2;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: 100%;
+
+}
+
+.slideshow-content h1 {
+    font-size: 5rem;
+    font-weight: 400;
+    padding-bottom: 40px;
+    color: rgb(236, 237, 240);
+}
+
+.slideshow-content p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.slideshow-content .cta-button {
+    background: #f26e21;
+    border-radius: 5px;
+    padding: .3rem 5rem;
+    font-size: 2.5rem;
+    border: 0;
+    color: black;
+    transition: all 0.3s ease-in;
+    cursor: pointer;
+}
+
+.slideshow-content .cta-button:hover {
+    background-color: #00507d;
+    color: beige;
+}
