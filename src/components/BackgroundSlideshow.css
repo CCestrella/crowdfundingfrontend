@@ -42,7 +42,7 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 100%;
     height: 100%;
-
+    font-weight: bold; /* Make text bolder */
 }
 
 .slideshow-content h1 {

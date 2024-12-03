@@ -1,8 +1,38 @@
-#athlete-list {
-    display: grid;
-    grid-template-columns: 30% 30% 30%;
-    column-gap: 10px;
-    row-gap: 10px;
-  }
+.crowd-funding__header {
+  background-color: white; /* Blue background color */
+  padding: 2rem; /* Add some padding for spacing */
+  border-radius: 8px; /* Optional: Rounded corners */
+  color:#003479; /* White text for contrast */
+  text-align: center; /* Center-align the text */
+  margin-bottom: 2rem; /* Add spacing below */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
-  
+.crowd-funding__header__description {
+  margin: 0 auto; /* Center content within the header */
+  max-width: 800px; /* Restrict the width of the content */
+  font-size: 1.2rem; /* Increase font size for better readability */
+  line-height: 1.6; /* Adjust line spacing */
+}
+
+
+.button {
+  background: #f26e21;
+  border-radius: 5px;
+  padding: .3rem 5rem;
+  font-size: 2.5rem;
+  border: 0;
+  color: black;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 200px;
+  height: auto; /* Adjust the height of the button */
+  display: block; /* Make the button a block element */
+  margin: 0 auto; /* Center the button horizontally */
+}
+
+.button:hover {
+  background-color: #00507d; /* Optional: Add hover effect */
+  color: beige; /* Optional: Change text color on hover */
+};

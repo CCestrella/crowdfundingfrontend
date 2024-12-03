@@ -4,17 +4,22 @@
   justify-content: center; /* Center the items horizontally */
   gap: 1.5rem; /* Add space between items */
   padding: 2rem;
+  background-image: url('https://i.ibb.co/9hF7QxJ/h-15.png'); /* Add background image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the image */
 }
 
 .athlete-card {
   width: 100%;
   max-width: 350px;
-  border: 1px solid #ddd;
+  border: 2px solid #160101;
+  background-color: #f8f9fa; /* Change the background color */
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 1rem;
   transition: transform 0.2s ease-in-out;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;;
 }
 
 .athlete-card:hover {
@@ -41,13 +46,14 @@
   margin: 0.5rem 0;
   font-size: 1rem;
   color: #555;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .athlete-card-content a {
   display: inline-block;
   margin-top: 1rem;
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: #0056b3;
   color: #fff;
   text-decoration: none;
   border-radius: 5px;
@@ -55,5 +61,5 @@
 }
 
 .athlete-card-content a:hover {
-  background-color: #0056b3;
+  background-color: #f26e21;
 }
