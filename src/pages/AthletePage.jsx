@@ -1,6 +1,3 @@
-import { allAthletes } from "../data";
-import AthleteCard from "../components/AthleteCard";
-
 function AthletePage() {
   return (
     <div>
@@ -15,13 +12,3 @@ function AthletePage() {
 }
 
 export default AthletePage;
-
-export function AthleteList() {
-  return (
-    <div id="athlete-list">
-      {allAthletes.map((athleteData, key) => (
-        <div key={key}>{athleteData.title}</div>
-      ))}
-    </div>
-  );
-}

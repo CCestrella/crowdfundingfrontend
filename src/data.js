@@ -183,3 +183,6 @@ export const allAthletes = [
     owner: 1,
   },
 ];
+
+
+export default allAthletes;

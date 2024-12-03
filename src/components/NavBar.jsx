@@ -9,7 +9,7 @@ function NavBar() {
         <div className="navbar-logo"><img src={logo} alt="Logo" /></div>
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/athlete" className="nav-link">Athlete</Link>
+          <Link to="/pledges" className="nav-link">Donate</Link>
         </div>
       </nav>
       <Outlet />

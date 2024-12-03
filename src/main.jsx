@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/athlete",
+    path: "/Athlete",
     element: (
       <>
         <NavBar />
