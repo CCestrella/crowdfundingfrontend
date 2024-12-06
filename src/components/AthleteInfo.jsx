@@ -22,14 +22,20 @@ function AthleteInfo() {
       <h3>Achievements:</h3>
       <p>{athlete.achievements}</p>
       <h3>Pledges:</h3>
-      <ul>
-        {athlete.pledges.map((pledgeData, key) => (
-          <li key={key}>
-            ${pledgeData.amount} from{" "}
-            {pledgeData.anonymous ? "Anonymous" : `Supporter ${pledgeData.supporter}`}
-          </li>
-        ))}
-      </ul>
+      {athlete.pledges && athlete.pledges.length > 0 ? (
+        <ul>
+          {athlete.pledges.map((pledgeData, key) => (
+            <li key={key}>
+              ${pledgeData.amount} from{" "}
+              {pledgeData.anonymous
+                ? "Anonymous"
+                : `Supporter ${pledgeData.supporter}`}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No pledges available.</p>
+      )}
     </div>
   );
 }
