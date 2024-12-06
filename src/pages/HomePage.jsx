@@ -4,8 +4,11 @@ import "./HomePage.css";
 import AthleteCard from "../components/AthleteCard";
 import "../components/AthleteCard.css";
 import athletes from "../data";
+import useProjects from "../hooks/use-projects";
 
 const HomePage = () => {
+  const { athlete } = useProjects();
+
   return (
     <div>
       <BackgroundSlideshow />

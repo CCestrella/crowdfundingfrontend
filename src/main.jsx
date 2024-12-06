@@ -6,39 +6,26 @@ import HomePage from "./pages/HomePage.jsx";
 import AthletePage from "./pages/AthletePage.jsx";
 import AthleteInfo from "./components/AthleteInfo.jsx";
 import NavBar from "./components/NavBar.jsx";
+import { AuthProvider } from "./components/AuthProvider.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <>
-        <NavBar />
-        <HomePage />
-      </>
-    ),
-  },
-  {
-    path: "/Athlete",
-    element: (
-      <>
-        <NavBar />
-        <AthletePage />
-      </>
-    ),
-  },
-  {
-    path: "/athlete/:id", // Assuming athlete details can have individual pages
-    element: (
-      <>
-        <NavBar />
-        <AthleteInfo />
-      </>
-    ),
+    element: <NavBar />,
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/Athlete", element: <AthletePage /> },
+      { path: "/athlete/:id", element: <AthleteInfo /> },
+      { path: "/login", element: <LoginPage /> },
+    ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
