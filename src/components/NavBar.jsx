@@ -5,11 +5,6 @@ import logo from '../assets/cflogo.svg';
 // import useAuth from "/src/hooks/use-auth.js";
 import { useAuth } from "/src/hooks/use-auth.js";
 
-
-
-
-
-
 function NavBar() {
   const { auth, setAuth } = useAuth();
 
@@ -19,9 +14,6 @@ function NavBar() {
   };
 
   console.log(auth)
-
-
-
 
   return (
     <div>

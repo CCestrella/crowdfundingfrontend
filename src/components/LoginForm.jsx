@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import postLogin from "../api/post-login.js";
-import { useAuth } from "../hooks/use-auth.js"; 
+import { useAuth } from "../hooks/use-auth.js";
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -40,29 +40,32 @@ function LoginForm() {
     };
 
     return (
-        <form>
-            <div>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    placeholder="Enter username"
-                    onChange={handleChange}
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Password"
-                    onChange={handleChange}
-                />
-            </div>
-            <button type="submit" onClick={handleSubmit}>
-                Login
-            </button>
-        </form>
+        <div>
+            <form className="login-page">
+                <div>
+                    <label htmlFor="username">Username:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Enter username"
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <label htmlFor="password">Password:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Password"
+                        onChange={handleChange}
+                    />
+                </div>
+                <button type="submit" onClick={handleSubmit}>
+                    Login
+                </button>
+            </form>
+        </div>
+
     );
 }
 
