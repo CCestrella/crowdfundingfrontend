@@ -1,0 +1,138 @@
+.pledge-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pledge-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pledge-input,
+.pledge-textarea {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    resize: none;
+    /* Prevents resizing for textarea */
+    box-sizing: border-box;
+}
+
+.pledge-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+.pledge-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pledge-button:hover {
+    background-color: #0056b3;
+}
+
+.pledge-error {
+    margin-top: 10px;
+    color: red;
+}
+
+.pledge-success {
+    margin-top: 10px;
+    color: green;
+}
+
+.athlete-search {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.athlete-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.athlete-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.athlete-item:hover {
+    background-color: #f4f4f9;
+}
+
+.athlete-item.selected {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pledge-reset-button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #dc3545;
+    /* Red for reset */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.pledge-reset-button:hover {
+    background-color: #c82333;
+}
+
+.athlete-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.athlete-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.athlete-item:hover {
+    background-color: #f4f4f9;
+}
+
+.athlete-item.selected {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}

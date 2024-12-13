@@ -19,42 +19,39 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    /* Dark overlay */
-    z-index: -1;
-    /* Behind the form */
+    background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+    z-index: -1; /* Behind the form */
 }
 
 .login-page form {
     width: 100%;
     max-width: 400px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 30px;
-    background-color: rgba(255, 255, 255, 0.9);
-    /* Semi-transparent white */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
     border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    /* Soft shadow */
-    font-family: 'Poppins', Arial, sans-serif;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Soft shadow */
     box-sizing: border-box;
     text-align: center;
-    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .login-page form h2 {
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     color: #333;
     font-size: 24px;
     font-weight: 600;
 }
 
 .login-page input {
-    width: 100%;
     padding: 12px;
-    margin: 15px 0;
-    border: 1px solid #ddd;
-    border-radius: 6px;
     font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    width: 100%;
+    margin-bottom: 10px;
     box-sizing: border-box;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -66,31 +63,27 @@
 }
 
 .login-page button {
-    width: 100%;
     padding: 14px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 6px;
     font-size: 18px;
     font-weight: 500;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .login-page button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
-    /* Slight lift effect */
+    transform: translateY(-2px); /* Slight lift effect */
 }
 
 .login-page button:active {
-    transform: translateY(0);
-    /* Reset lift effect */
+    transform: translateY(0); /* Reset lift effect */
 }
 
 .login-page a {
-    display: block;
     margin-top: 15px;
     color: #007bff;
     text-decoration: none;
@@ -100,4 +93,16 @@
 
 .login-page a:hover {
     color: #0056b3;
+}
+
+.login-error {
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.login-success {
+    color: green;
+    margin-top: 10px;
+    font-size: 14px;
 }

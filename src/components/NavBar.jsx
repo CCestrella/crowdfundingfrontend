@@ -21,9 +21,9 @@ function NavBar() {
         <div className="navbar-logo"><img src={logo} alt="Logo" /></div>
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/login" className="nav-link">Donate</Link>
-          <Link to="/login" className="nav-link">Raise Fund</Link>
-          {/* <Link to="/login">Log In</Link> */}
+          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/users" className="nav-link">Sign Up</Link>
+          {/* <Link to="/login" className="nav-link">Raise Fund</Link> */}
         </div>
       </nav>
       <Outlet />

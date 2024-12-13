@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import postAthlete from "../api/post-athlete.js";
 // import "./CreateAthleteForm.css";
+import "./PostPledgesForm.css";
 
 function CreateAthleteForm() {
     const navigate = useNavigate();
