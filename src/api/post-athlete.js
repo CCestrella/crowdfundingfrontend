@@ -1,39 +1,36 @@
-async function postAthlete(first_name, last_name, bio, age, sport, goal, image, video) {
+async function postAthlete(payload) {
   const url = `${import.meta.env.VITE_API_URL}/athletes/`;
-  const response = await fetch(url, {
-    method: "POST", // We need to tell the server that we are sending JSON data so we set the Content-Type header to application/json
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      first_name: first_name,
-      last_name: last_name,
-      bio: bio,
-      age: age,
-      sport: sport,
-      goal: goal,
-      funds_raised: funds_raised,
-      is_open: true,
-      funding_breakdown: funding_breakdown,
-      achievements: achievements,
-      image: image,
-      video: video,
-      progress_updates: progress_updates,
-    }),
-  });
+  const token = localStorage.getItem("authToken"); // Correct key name
+  console.log("Token in postAthlete:", token); // Debugging
 
-  if (!response.ok) {
-    const fallbackError = `Error trying to login`;
-
-    const data = await response.json().catch(() => {
-      throw new Error(fallbackError);
-    });
-
-    const errorMessage = data?.detail ?? fallbackError;
-    throw new Error(errorMessage);
+  if (!token) {
+    alert("Authentication token is missing. Please log in again.");
+    throw new Error("Missing authentication token");
   }
 
-  return await response.json();
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`, // Include token here
+      },
+      body: JSON.stringify(payload),
+    });
+
+    console.log("Response from server:", response); // Debugging response
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Error response from server:", errorData); // Log error
+      throw new Error(errorData.detail || "Error creating athlete");
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Error creating athlete:", error);
+    throw error;
+  }
 }
 
 export default postAthlete;

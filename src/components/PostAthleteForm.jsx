@@ -1,201 +1,145 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import postAthlete from "../api/post-athlete.js";
-// import "./CreateAthleteForm.css";
-import "./PostPledgesForm.css";
+import "./PostAthleteForm.css";
 
-function CreateAthleteForm() {
-    const navigate = useNavigate();
+function PostAthleteForm() {
+  const navigate = useNavigate();
 
-    const [athleteData, setAthleteData] = useState({
-        first_name: "",
-        last_name: "",
-        bio: "",
-        age: "",
-        sport: "",
-        goal: "",
-        funds_raised: "",
-        funding_breakdown: "",
-        achievements: "",
-        image: null,
-        video: null,
-        progress_updates: "",
-    });
+  const olympicSports = [
+    "Archery", "Athletics", "Badminton", "Baseball/Softball", "Basketball",
+    "Boxing", "Canoe/Kayak", "Cycling", "Diving", "Equestrian", "Fencing",
+    "Football (Soccer)", "Golf", "Gymnastics", "Handball", "Hockey", "Judo",
+    "Modern Pentathlon", "Rowing", "Rugby", "Sailing", "Shooting", "Skateboarding",
+    "Sport Climbing", "Surfing", "Swimming", "Table Tennis", "Taekwondo", "Tennis",
+    "Triathlon", "Volleyball", "Weightlifting", "Wrestling"
+  ];
 
-    const handleChange = (event) => {
-        const { id, value, type, files } = event.target;
-        setAthleteData((prevData) => ({
-            ...prevData,
-            [id]: type === "file" ? files[0] : value,
-        }));
+  const [athleteData, setAthleteData] = useState({
+    first_name: "",
+    last_name: "",
+    bio: "",
+    age: "",
+    sport: "",
+    goal: "",
+    funds_raised: "",
+    is_open: "true",
+    funding_breakdown: "",
+    achievements: "",
+    image: "",
+    video: "",
+    progress_updates: "",
+  });
+
+  // Check for token on component load
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Authentication token is missing. Redirecting to login...");
+      navigate("/login"); // Redirect to login if token is missing
+    }
+  }, [navigate]);
+
+  const handleChange = (event) => {
+    const { id, value } = event.target;
+    setAthleteData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Validation
+    if (!athleteData.first_name || !athleteData.last_name || !athleteData.age || !athleteData.sport) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    // Prepare payload
+    const payload = {
+      first_name: athleteData.first_name,
+      last_name: athleteData.last_name,
+      bio: athleteData.bio || "",
+      age: parseInt(athleteData.age, 10),
+      sport: athleteData.sport,
+      goal: parseFloat(parseFloat(athleteData.goal).toFixed(2)),
+      funds_raised: parseFloat(athleteData.funds_raised) || 0,
+      is_open: athleteData.is_open === "true",
+      funding_breakdown: athleteData.funding_breakdown || "",
+      achievements: athleteData.achievements || "",
+      image: athleteData.image || "",
+      video: athleteData.video || "",
+      progress_updates: athleteData.progress_updates || "",
     };
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const {
-            first_name,
-            last_name,
-            bio,
-            age,
-            sport,
-            goal,
-            funds_raised,
-            funding_breakdown,
-            achievements,
-            image,
-            video,
-            progress_updates,
-        } = athleteData;
+    try {
+      console.log("Submitting Payload:", payload);
+      const result = await postAthlete(payload);
+      console.log("Athlete created successfully:", result);
+      alert("Athlete created successfully!");
+      navigate("/"); // Redirect to home or athlete list
+    } catch (error) {
+      console.error("Error in handleSubmit:", error);
+      alert(error.message || "An error occurred while creating the athlete. Please try again.");
+    }
+  };
 
-        if (first_name && last_name && bio && age && sport && goal) {
-            postAthlete(
-                first_name,
-                last_name,
-                bio,
-                age,
-                sport,
-                goal,
-                image,
-                video,
-                funds_raised,
-                funding_breakdown,
-                achievements,
-                progress_updates
-            ).then(() => {
-                navigate("/"); // Navigate to home or a confirmation page after successful submission
-            });
-        }
-    };
+  return (
+    <div>
+      <form className="create-athlete-form" onSubmit={handleSubmit}>
+        <label htmlFor="first_name">First Name:</label>
+        <input type="text" id="first_name" value={athleteData.first_name} onChange={handleChange} required />
 
-    return (
-        <div>
-            <form className="create-athlete-form" onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="first_name">First Name:</label>
-                    <input
-                        type="text"
-                        id="first_name"
-                        placeholder="Enter first name"
-                        value={athleteData.first_name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="last_name">Last Name:</label>
-                    <input
-                        type="text"
-                        id="last_name"
-                        placeholder="Enter last name"
-                        value={athleteData.last_name}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="bio">Bio:</label>
-                    <textarea
-                        id="bio"
-                        placeholder="Enter bio"
-                        value={athleteData.bio}
-                        onChange={handleChange}
-                        required
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="age">Age:</label>
-                    <input
-                        type="number"
-                        id="age"
-                        name="age" min="5" max="18"
-                        placeholder="Enter age"
-                        value={athleteData.age}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="sport">Sport:</label>
-                    <input
-                        type="text"
-                        id="sport"
-                        placeholder="Enter sport"
-                        value={athleteData.sport}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="goal">Goal:</label>
-                    <input
-                        type="text"
-                        id="goal"
-                        placeholder="Enter goal"
-                        value={athleteData.goal}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="funds_raised">Funds Raised:</label>
-                    <input
-                        type="number"
-                        id="funds_raised"
-                        placeholder="Enter funds raised"
-                        value={athleteData.funds_raised}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="funding_breakdown">Funding Breakdown:</label>
-                    <textarea
-                        id="funding_breakdown"
-                        placeholder="Enter funding breakdown"
-                        value={athleteData.funding_breakdown}
-                        onChange={handleChange}
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="achievements">Achievements:</label>
-                    <textarea
-                        id="achievements"
-                        placeholder="Enter achievements"
-                        value={athleteData.achievements}
-                        onChange={handleChange}
-                    ></textarea>
-                </div>
-                <div>
-                    <label htmlFor="image">Image:</label>
-                    <input
-                        type="file"
-                        id="image"
-                        accept="image/*"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="video">Video:</label>
-                    <input
-                        type="file"
-                        id="video"
-                        accept="video/*"
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="progress_updates">Progress Updates:</label>
-                    <textarea
-                        id="progress_updates"
-                        placeholder="Enter progress updates"
-                        value={athleteData.progress_updates}
-                        onChange={handleChange}
-                    ></textarea>
-                </div>
-                <button type="submit">Create Athlete</button>
-            </form>
-        </div>
-    );
+        <label htmlFor="last_name">Last Name:</label>
+        <input type="text" id="last_name" value={athleteData.last_name} onChange={handleChange} required />
+
+        <label htmlFor="bio">Bio:</label>
+        <textarea id="bio" value={athleteData.bio} onChange={handleChange} required />
+
+        <label htmlFor="age">Age:</label>
+        <input type="number" id="age" value={athleteData.age} onChange={handleChange} required />
+
+        <label htmlFor="sport">Sport:</label>
+        <select id="sport" value={athleteData.sport} onChange={handleChange} required>
+          <option value="" disabled>Select a sport</option>
+          {olympicSports.map((sport) => (
+            <option key={sport} value={sport}>{sport}</option>
+          ))}
+        </select>
+
+        <label htmlFor="goal">Goal (USD):</label>
+        <input type="number" id="goal" value={athleteData.goal} onChange={handleChange} required />
+
+        <label htmlFor="funds_raised">Funds Raised:</label>
+        <input type="number" id="funds_raised" value={athleteData.funds_raised} onChange={handleChange} />
+
+        <label htmlFor="is_open">Is Open:</label>
+        <select id="is_open" value={athleteData.is_open.toString()} onChange={handleChange}>
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+
+        <label htmlFor="funding_breakdown">Funding Breakdown:</label>
+        <textarea id="funding_breakdown" value={athleteData.funding_breakdown} onChange={handleChange} />
+
+        <label htmlFor="achievements">Achievements:</label>
+        <textarea id="achievements" value={athleteData.achievements} onChange={handleChange} />
+
+        <label htmlFor="image">Image URL:</label>
+        <input type="url" id="image" value={athleteData.image} onChange={handleChange} />
+
+        <label htmlFor="video">Video URL:</label>
+        <input type="url" id="video" value={athleteData.video} onChange={handleChange} />
+
+        <label htmlFor="progress_updates">Progress Updates:</label>
+        <textarea id="progress_updates" value={athleteData.progress_updates} onChange={handleChange} />
+
+        <button type="submit">Create Athlete</button>
+      </form>
+    </div>
+  );
 }
 
-export default CreateAthleteForm;
+export default PostAthleteForm;

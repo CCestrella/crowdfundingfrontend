@@ -27,21 +27,20 @@ function LoginForm() {
         if (credentials.username && credentials.password) {
             postLogin(credentials.username, credentials.password)
                 .then((response) => {
-                    // Store the token
-                    window.localStorage.setItem("token", response.token);
-
+                    // Store the token consistently
+                    window.localStorage.setItem("authToken", response.token);
+    
                     // Set authentication state
                     setAuth({
                         token: response.token,
-                        firstName: response.first_name, // Assuming the API returns a `first_name`
+                        firstName: response.first_name, // Assuming the API returns `first_name`
                     });
-
+    
                     // Redirect to the landing page
                     navigate("/landing");
                 })
                 .catch((error) => {
                     console.error("Login failed:", error);
-                    // Handle errors appropriately, e.g., show a message to the user
                 });
         }
     };
