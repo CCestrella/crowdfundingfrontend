@@ -1,32 +1,32 @@
-async function postPledge(amount, comment, anonymous, athlete_profile_id, supporter_id) {
+async function postPledge(amount, comment, anonymous, athlete_profile_id) {
+    const token = localStorage.getItem("authToken");
+
+    if (!token) {
+        throw new Error("Authentication token is missing. Please log in.");
+    }
+
     const url = `${import.meta.env.VITE_API_URL}/pledges/`;
     const response = await fetch(url, {
-        method: "POST", // Specify this is a POST request
+        method: "POST",
         headers: {
-            "Content-Type": "application/json", // Inform the server about the JSON payload
+            "Content-Type": "application/json",
+            "Authorization": `Token ${token}`,
         },
         body: JSON.stringify({
             amount: amount,
-            comment: comment || "", // Optional comment
+            comment: comment || "",
             anonymous: anonymous,
-            is_fulfilled: true, // Default to true since pledges are fulfilled upon creation
-            athlete_profile: athlete_profile_id, // Link to the athlete profile by ID
-            supporter: supporter_id, // Link to the user (supporter) by ID
+            is_fulfilled: true,
+            athlete_profile: athlete_profile_id, // Corrected field name
         }),
     });
 
     if (!response.ok) {
-        const fallbackError = `Error creating the pledge`;
-
-        const data = await response.json().catch(() => {
-            throw new Error(fallbackError);
-        });
-
-        const errorMessage = data?.detail ?? fallbackError;
-        throw new Error(errorMessage);
+        const errorData = await response.json();
+        throw new Error(errorData.detail || "Failed to create pledge.");
     }
 
-    return await response.json(); // Return the server's response as JSON
+    return await response.json();
 }
 
 export default postPledge;

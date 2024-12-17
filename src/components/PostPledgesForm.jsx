@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./PostPledgesForm.css"; // Import the CSS file
+import postPledge from "../api/post-pledges"; // Import the postPledge function
 
 function PostPledgesForm() {
     const [athletes, setAthletes] = useState([]); // List of athletes
@@ -13,6 +15,16 @@ function PostPledgesForm() {
     const [searchQuery, setSearchQuery] = useState(""); // For the search bar
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate(); // Hook for navigation
+
+    // Authentication Check
+    useEffect(() => {
+        const token = localStorage.getItem("authToken");
+        if (!token) {
+            alert("You must be logged in to create a pledge.");
+            navigate("/login"); // Redirect to login page
+        }
+    }, [navigate]);
 
     // Fetch athletes from the API
     useEffect(() => {
@@ -74,35 +86,37 @@ function PostPledgesForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!selectedAthlete) {
             setError("Please select an athlete to donate to.");
             return;
         }
-        setError(null);
-        setSuccessMessage("");
+
+        const payload = {
+            amount: parseFloat(formData.amount),
+            comment: formData.comment || "",
+            anonymous: formData.anonymous,
+            is_fulfilled: true,
+            athlete_profile: selectedAthlete.id,
+        };
+
+        // Debugging athlete ID and payload
+        console.log("Selected Athlete ID:", selectedAthlete?.id);
+        console.log("Payload being sent:", payload);
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/pledges/`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    ...formData,
-                    athlete_profile: selectedAthlete.id, // Link the pledge to the athlete's ID
-                }),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail || "Failed to create pledge");
-            }
-
-            const result = await response.json();
+            const result = await postPledge(
+                payload.amount,
+                payload.comment,
+                payload.anonymous,
+                payload.athlete_profile
+            );
             setSuccessMessage("Pledge created successfully!");
-            setFormData({ amount: "", comment: "", anonymous: false }); // Reset the form
-        } catch (error) {
-            setError(error.message);
+            setFormData({ amount: "", comment: "", anonymous: false });
+        } catch (err) {
+            setError(err.message || "Failed to submit pledge.");
+            alert("An error occurred. Please check the console for details.");
+            console.error("Error:", err.message);
         }
     };
 
@@ -141,7 +155,9 @@ function PostPledgesForm() {
             {selectedAthlete && (
                 <p>
                     Selected Athlete:{" "}
-                    <strong>{selectedAthlete.first_name} {selectedAthlete.last_name}</strong>
+                    <strong>
+                        {selectedAthlete.first_name} {selectedAthlete.last_name}
+                    </strong>
                 </p>
             )}
 

@@ -11,7 +11,9 @@ import LoginPage from "./pages/LoginPage.jsx";
 import PostPledgesForm from "./components/PostPledgesForm.jsx";
 import PostAthletePage from "./pages/PostAthletePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx"; // Import SignUpPage
-import LandingPage from "./pages/LandingPage"; 
+import LandingPage from "./pages/LandingPage.jsx";
+import AthleteList from "./components/AthleteList.jsx";
+
 
 const router = createBrowserRouter([
   {
@@ -19,13 +21,14 @@ const router = createBrowserRouter([
     element: <NavBar />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/athlete", element: <AthletePage /> },
-      { path: "/athlete/:id", element: <AthleteInfo /> },
+      { path: "/athletes", element: <AthleteList /> }, // View all athletes
+      { path: "/athlete/new", element: <PostAthletePage /> }, // Create a new athlete
+      { path: "/athlete/:id", element: <AthleteInfo /> }, // View specific athlete details
       { path: "/login", element: <LoginPage /> },
-      { path: "/athletes", element: <PostAthletePage /> },
       { path: "/pledges", element: <PostPledgesForm /> },
-      { path: "/users", element: <SignUpPage /> }, 
+      { path: "/users", element: <SignUpPage /> },
       { path: "/landing", element: <LandingPage /> },
+      
     ],
   },
 ]);

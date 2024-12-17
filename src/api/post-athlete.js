@@ -1,29 +1,30 @@
-async function postAthlete(payload) {
-  const url = `${import.meta.env.VITE_API_URL}/athletes/`;
-  const token = localStorage.getItem("authToken"); // Correct key name
-  console.log("Token in postAthlete:", token); // Debugging
+const postAthlete = async (payload) => {
+  const token = localStorage.getItem("authToken"); // Ensure 'authToken' is used
+
+  console.log("Token being sent:", token); // Log the token for debugging
 
   if (!token) {
-    alert("Authentication token is missing. Please log in again.");
-    throw new Error("Missing authentication token");
+    alert("Authentication token is missing. Please log in.");
+    return;
   }
+
+  const url = `${import.meta.env.VITE_API_URL}/athlete/new/`;
 
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`, // Include token here
+        "Authorization": `Token ${token}`, // Use 'Token' prefix as required by DRF
       },
       body: JSON.stringify(payload),
     });
-
-    console.log("Response from server:", response); // Debugging response
+    console.log("Authorization Header:", `Token ${token}`);
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("Error response from server:", errorData); // Log error
-      throw new Error(errorData.detail || "Error creating athlete");
+      console.error("Error response from server:", errorData);
+      throw new Error(errorData.detail || "Failed to create athlete profile.");
     }
 
     return await response.json();
@@ -31,6 +32,6 @@ async function postAthlete(payload) {
     console.error("Error creating athlete:", error);
     throw error;
   }
-}
+};
 
-export default postAthlete;
+export { postAthlete };
