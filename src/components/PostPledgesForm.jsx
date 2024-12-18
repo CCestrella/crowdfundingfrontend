@@ -15,6 +15,7 @@ function PostPledgesForm() {
     const [searchQuery, setSearchQuery] = useState(""); // For the search bar
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
+    const [loading, setLoading] = useState(false); // Loading state
     const navigate = useNavigate(); // Hook for navigation
 
     // Authentication Check
@@ -86,9 +87,11 @@ function PostPledgesForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Set loading to true
 
         if (!selectedAthlete) {
             setError("Please select an athlete to donate to.");
+            setLoading(false); // Set loading to false
             return;
         }
 
@@ -113,10 +116,13 @@ function PostPledgesForm() {
             );
             setSuccessMessage("Pledge created successfully!");
             setFormData({ amount: "", comment: "", anonymous: false });
+            setLoading(false); // Set loading to false
+            window.location.reload(); // Refresh the page
         } catch (err) {
             setError(err.message || "Failed to submit pledge.");
             alert("An error occurred. Please check the console for details.");
             console.error("Error:", err.message);
+            setLoading(false); // Set loading to false
         }
     };
 
@@ -126,6 +132,7 @@ function PostPledgesForm() {
 
             {error && <p className="pledge-error">{error}</p>}
             {successMessage && <p className="pledge-success">{successMessage}</p>}
+            {loading && <p className="pledge-loading">Submitting your pledge...</p>} {/* Loading message */}
 
             <div className="athlete-search">
                 <input
@@ -140,9 +147,8 @@ function PostPledgesForm() {
                         {filteredAthletes.map((athlete) => (
                             <li
                                 key={athlete.id}
-                                className={`athlete-item ${
-                                    selectedAthlete?.id === athlete.id ? "selected" : ""
-                                }`}
+                                className={`athlete-item ${selectedAthlete?.id === athlete.id ? "selected" : ""
+                                    }`}
                                 onClick={() => setSelectedAthlete(athlete)}
                             >
                                 {athlete.first_name} {athlete.last_name} - {athlete.bio}
@@ -200,7 +206,7 @@ function PostPledgesForm() {
                     <label htmlFor="anonymous">Donate Anonymously</label>
                 </div>
 
-                <button type="submit" className="pledge-button">
+                <button type="submit" className="pledge-button" disabled={loading}>
                     Submit Pledge
                 </button>
                 <button type="button" className="pledge-reset-button" onClick={handleReset}>
