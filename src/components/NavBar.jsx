@@ -1,29 +1,42 @@
 import { Link, Outlet } from "react-router-dom";
-import "./NavBar.css"; // Add this CSS file for styles
+import { useAuth } from "/src/hooks/use-auth.jsx";
+import "./NavBar.css"; 
 import logo from '../assets/cflogo.svg';
-// import useAuth from "../hooks/use-auth.js";
-// import useAuth from "/src/hooks/use-auth.js";
-import { useAuth } from "/src/hooks/use-auth.js";
 
 function NavBar() {
   const { auth, setAuth } = useAuth();
 
   const handleLogout = () => {
     window.localStorage.removeItem("token");
-    setAuth({ token: null });
+    window.localStorage.removeItem("firstName");
+    setAuth({ token: null, firstName: null });  // Reset the auth context
   };
 
-  console.log(auth)
+  const firstName = auth.firstName || localStorage.getItem("firstName");
 
   return (
     <div>
       <nav className="navbar">
-        <div className="navbar-logo"><img src={logo} alt="Logo" /></div>
+        <div className="navbar-logo">
+          <img src={logo} alt="Logo" />
+        </div>
         <div className="navbar-links">
           <Link to="/" className="nav-link">Home</Link>
-          <Link to="/login" className="nav-link">Login</Link>
-          <Link to="/users" className="nav-link">Sign Up</Link>
-          {/* <Link to="/login" className="nav-link">Raise Fund</Link> */}
+          
+          {/* Conditionally render based on authentication */}
+          {auth.token ? (
+            <>
+              <span className="nav-welcome">Welcome, {firstName || "User"}!</span>
+              <button onClick={handleLogout} className="nav-link logout-button">
+                Logout
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="nav-link">Login</Link>
+              <Link to="/users" className="nav-link">Sign Up</Link>
+            </>
+          )}
         </div>
       </nav>
       <Outlet />

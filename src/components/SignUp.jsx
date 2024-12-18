@@ -9,6 +9,7 @@ const SignUp = () => {
         firstName: "",
         lastName: "",
         email: "",
+        role: "donor", // Default role is "donor"
     });
 
     const [error, setError] = useState(null);
@@ -33,7 +34,8 @@ const SignUp = () => {
                 formData.password,
                 formData.firstName,
                 formData.lastName,
-                formData.email
+                formData.email,
+                formData.role // Add role to the API payload
             );
             setSuccess(`User created successfully! ID: ${newUser.id}`);
         } catch (err) {
@@ -90,6 +92,22 @@ const SignUp = () => {
                     className="signup-input"
                     required
                 />
+
+                {/* Dropdown menu for user role */}
+                <label htmlFor="role">Choose your role:</label>
+                <select
+                    name="role"
+                    id="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                    className="signup-input"
+                    required
+                >
+                    <option value="athlete">Athlete</option>
+                    <option value="donor">Donor</option>
+                    <option value="both">Both</option>
+                </select>
+
                 <button type="submit" className="signup-button">
                     Sign Up
                 </button>

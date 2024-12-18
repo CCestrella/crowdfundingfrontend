@@ -1,4 +1,3 @@
-import React from "react";
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import "./HomePage.css";
 import AthleteCard from "../components/AthleteCard";

@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react"; // Import React once with hooks
 import "./BackgroundSlideshow.css";
-
 
 const images = [
     "https://i.ibb.co/yVqTdJH/4ed2379f59480971-800.jpg",

@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -14,7 +13,6 @@ import SignUpPage from "./pages/SignUpPage.jsx"; // Import SignUpPage
 import LandingPage from "./pages/LandingPage.jsx";
 import AthleteList from "./components/AthleteList.jsx";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,7 +26,6 @@ const router = createBrowserRouter([
       { path: "/pledges", element: <PostPledgesForm /> },
       { path: "/users", element: <SignUpPage /> },
       { path: "/landing", element: <LandingPage /> },
-      
     ],
   },
 ]);

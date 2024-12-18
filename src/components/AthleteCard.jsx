@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // Correctly import React and hooks
 import './AthleteCard.css';
 import { Link } from 'react-router-dom';
 import allAthletes from '../data'; // Import the athlete data array

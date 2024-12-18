@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; // Import React once with hooks
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./PostPledgesForm.css"; // Import the CSS file
 import postPledge from "../api/post-pledges"; // Import the postPledge function
@@ -218,3 +218,5 @@ function PostPledgesForm() {
 }
 
 export default PostPledgesForm;
+
+

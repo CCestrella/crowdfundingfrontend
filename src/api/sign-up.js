@@ -1,16 +1,17 @@
-async function signUp(username, password, firstName, lastName, email) {
+async function signUp(username, password, firstName, lastName, email, role) {
     const url = `${import.meta.env.VITE_API_URL}/users/`; // The sign-up endpoint
     const response = await fetch(url, {
-        method: "POST", // Specify that this is a POST request
+        method: "POST",
         headers: {
-            "Content-Type": "application/json", // Inform the server about the JSON payload
+            "Content-Type": "application/json",
         },
         body: JSON.stringify({
             username: username,
             password: password,
-            first_name: firstName, // Map the first name field
-            last_name: lastName, // Map the last name field
-            email: email, // Map the email field
+            first_name: firstName,
+            last_name: lastName,
+            email: email,
+            role: role, // Add the role field here
         }),
     });
 
@@ -22,10 +23,10 @@ async function signUp(username, password, firstName, lastName, email) {
         });
 
         const errorMessage = data?.detail ?? fallbackError;
-        throw new Error(errorMessage); // Throw an error if the request fails
+        throw new Error(errorMessage);
     }
 
-    return await response.json(); // Return the server's response as JSON
+    return await response.json();
 }
 
 export default signUp;
