@@ -14,6 +14,8 @@ function LoginForm() {
     password: "",
   });
 
+  const [error, setError] = useState(null);
+
   const handleChange = (event) => {
     const { id, value } = event.target;
     setCredentials((prevCredentials) => ({
@@ -27,20 +29,20 @@ function LoginForm() {
     if (credentials.username && credentials.password) {
       postLogin(credentials.username, credentials.password)
         .then((response) => {
-          const { token, first_name } = response;  // Ensure first_name is included in the response
-          // Store both token and first_name in localStorage and context
-          window.localStorage.setItem("token", token);
-          window.localStorage.setItem("firstName", first_name); 
+          const { token, first_name } = response;
+          localStorage.setItem("authToken", token);
+          localStorage.setItem("firstName", first_name);
 
           setAuth({
             token: token,
-            firstName: first_name,  // Set the firstName in context
+            firstName: first_name || credentials.username, // Default to username if first_name is missing
           });
 
-          navigate("/landing");  // Redirect to landing page after login
+          navigate("/landing");
         })
         .catch((error) => {
           console.error("Login failed:", error);
+          setError("Login failed. Please check your credentials.");
         });
     }
   };
@@ -48,6 +50,7 @@ function LoginForm() {
   return (
     <div>
       <form className="login-page">
+        {error && <p className="error">{error}</p>} {/* Display error */}
         <div>
           <label htmlFor="username">Username:</label>
           <input

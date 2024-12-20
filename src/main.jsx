@@ -1,39 +1,44 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-import HomePage from "./pages/HomePage.jsx";
-import AthletePage from "./pages/AthletePage.jsx";
-import AthleteInfo from "./components/AthleteInfo.jsx";
-import NavBar from "./components/NavBar.jsx";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { AuthProvider } from "./components/AuthProvider.jsx";
+import NavBar from "./components/NavBar.jsx";
+import HomePage from "./pages/HomePage.jsx";
+import AthleteList from "./components/AthleteList.jsx";
+import PostAthletePage from "./pages/PostAthletePage.jsx";
+import AthleteInfo from "./components/AthleteInfo.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import PostPledgesForm from "./components/PostPledgesForm.jsx";
-import PostAthletePage from "./pages/PostAthletePage.jsx";
-import SignUpPage from "./pages/SignUpPage.jsx"; // Import SignUpPage
+import SignUpPage from "./pages/SignUpPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
-import AthleteList from "./components/AthleteList.jsx";
+
+const AppLayout = () => (
+  <div>
+    <NavBar />
+    <Outlet />
+  </div>
+);
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBar />,
+    element: <AppLayout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/athletes", element: <AthleteList /> }, // View all athletes
-      { path: "/athlete/new", element: <PostAthletePage /> }, // Create a new athlete
-      { path: "/athlete/:id", element: <AthleteInfo /> }, // View specific athlete details
+      { path: "/athletes", element: <AthleteList /> },
+      { path: "/athlete/new", element: <PostAthletePage /> },
+      { path: "/athlete/:id", element: <AthleteInfo /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/pledges", element: <PostPledgesForm /> },
-      { path: "/users", element: <SignUpPage /> },
+      { path: "/users/", element: <SignUpPage /> },
       { path: "/landing", element: <LandingPage /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
-  </React.StrictMode>
+  <AuthProvider>
+    <RouterProvider router={router} />
+  </AuthProvider>
 );
+
