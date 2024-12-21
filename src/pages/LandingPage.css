@@ -1,23 +1,41 @@
+body {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://i.ibb.co/T4SwLHY/h-16.png);
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .landing-page {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    background-color: #f4f4f9;
+    max-width: 80%;
+    width: 500px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 20px;
     text-align: center;
 }
 
 .landing-page h1 {
-    font-size: 2.5rem;
+    font-size: 1.8em;
+    margin-bottom: 10px;
     color: #333;
-    margin-bottom: 20px;
 }
 
 .landing-page p {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 30px;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #555;
+    margin-bottom: 20px;
 }
 
 .landing-options {
@@ -26,15 +44,18 @@
 }
 
 .landing-button {
+    display: inline-block;
     padding: 10px 20px;
-    font-size: 1rem;
-    text-decoration: none;
-    color: white;
-    background-color: #007bff;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    background-color: #057f94;
+    color: #fff;
+    font-size: 1em;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .landing-button:hover {
-    background-color: #0056b3;
+    background-color: #c24528;
 }
