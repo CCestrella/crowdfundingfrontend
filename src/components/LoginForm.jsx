@@ -35,7 +35,7 @@ function LoginForm() {
 
           setAuth({
             token: token,
-            firstName: first_name || credentials.username, // Default to username if first_name is missing
+            firstName: first_name || credentials.username,
           });
 
           navigate("/landing");
@@ -48,9 +48,15 @@ function LoginForm() {
   };
 
   return (
-    <div>
+    <div className="form-container">
+      <div className="form-container__text">
+        <h1>Welcome to Champs Fund</h1>
+        <p>
+Your help can go a long way—every contribution brings us closer to building a brighter future for these children. Together, we can make a difference.
+        </p>
+      </div>
       <form className="login-page">
-        {error && <p className="error">{error}</p>} {/* Display error */}
+        {error && <p className="error">{error}</p>}
         <div>
           <label htmlFor="username">Username:</label>
           <input
@@ -72,6 +78,9 @@ function LoginForm() {
         <button type="submit" onClick={handleSubmit}>
           Login
         </button>
+        <small class="form-box__addon u-auto-format-text">
+      Forget Password? <a href="#0">Reset here</a>
+    </small>
       </form>
     </div>
   );

@@ -218,5 +218,3 @@ function PostPledgesForm() {
 }
 
 export default PostPledgesForm;
-
-

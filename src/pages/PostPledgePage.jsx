@@ -1,7 +1,7 @@
-import PostPledgeForm from "../components/PostPledgeForm";
+import PostPledgesForm from "../components/PostPledgesForm";
 
 function PostPledgePage() {
-    return <PostPledgeForm />;
+    return <PostPledgesForm />;
 }
 
 export default PostPledgePage;

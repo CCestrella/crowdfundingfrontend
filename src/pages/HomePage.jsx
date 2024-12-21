@@ -1,12 +1,13 @@
+import React from "react";
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import "./HomePage.css";
 import AthleteCard from "../components/AthleteCard";
 import "../components/AthleteCard.css";
 import athletes from "../data";
-import useProjects from "../hooks/use-projects";
+import { useAuth } from "../components/AuthProvider";
 
 const HomePage = () => {
-  const { athlete } = useProjects();
+  const { auth, logout } = useAuth();
 
   return (
     <div>

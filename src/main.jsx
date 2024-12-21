@@ -4,11 +4,11 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { AuthProvider } from "./components/AuthProvider.jsx";
 import NavBar from "./components/NavBar.jsx";
 import HomePage from "./pages/HomePage.jsx";
-import AthleteList from "./components/AthleteList.jsx";
+import AthleteListPage from "./components/AthleteList.jsx"; // Updated to the correct import
 import PostAthletePage from "./pages/PostAthletePage.jsx";
 import AthleteInfo from "./components/AthleteInfo.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import PostPledgesForm from "./components/PostPledgesForm.jsx";
+import PostPledgePage from "./pages/PostPledgePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 
@@ -25,20 +25,21 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/athletes", element: <AthleteList /> },
+      { path: "/athletes", element: <AthleteListPage /> },
       { path: "/athlete/new", element: <PostAthletePage /> },
-      { path: "/athlete/:id", element: <AthleteInfo /> },
+      { path: "/athlete/:id", element: <AthleteInfo /> }, // Ensure proper route
       { path: "/login", element: <LoginPage /> },
-      { path: "/pledges", element: <PostPledgesForm /> },
-      { path: "/users/", element: <SignUpPage /> },
+      { path: "/pledges", element: <PostPledgePage /> },
+      { path: "/users", element: <SignUpPage /> },
       { path: "/landing", element: <LandingPage /> },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AuthProvider>
-    <RouterProvider router={router} />
-  </AuthProvider>
+  <React.StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </React.StrictMode>
 );
-
