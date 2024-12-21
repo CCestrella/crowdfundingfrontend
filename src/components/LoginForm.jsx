@@ -35,7 +35,7 @@ function LoginForm() {
 
           setAuth({
             token: token,
-            firstName: first_name || credentials.username,
+            user: first_name || credentials.username,
           });
 
           navigate("/landing");
@@ -52,7 +52,9 @@ function LoginForm() {
       <div className="form-container__text">
         <h1>Welcome to Champs Fund</h1>
         <p>
-Your help can go a long way—every contribution brings us closer to building a brighter future for these children. Together, we can make a difference.
+          Your help can go a long way—every contribution brings us closer to
+          building a brighter future for these children. Together, we can make
+          a difference.
         </p>
       </div>
       <form className="login-page">
@@ -78,9 +80,9 @@ Your help can go a long way—every contribution brings us closer to building a 
         <button type="submit" onClick={handleSubmit}>
           Login
         </button>
-        <small class="form-box__addon u-auto-format-text">
-      Forget Password? <a href="#0">Reset here</a>
-    </small>
+        <small className="form-box__addon u-auto-format-text">
+          Forget Password? <a href="#0">Reset here</a>
+        </small>
       </form>
     </div>
   );

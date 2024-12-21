@@ -9,12 +9,12 @@ function NavBar() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("firstName");
-    setAuth({ token: null, firstName: null }); // Reset auth context
+    localStorage.removeItem("user");
+    setAuth({ token: null, user: null }); // Reset auth context
     navigate("/"); // Redirect to home
   };
 
-  const firstName = auth.firstName || localStorage.getItem("firstName");
+  const userName = auth.user || localStorage.getItem("user");
 
   return (
     <nav className="navbar">
@@ -28,7 +28,7 @@ function NavBar() {
         <Link to="/" className="nav-link">Home</Link>
         {auth.token ? (
           <>
-            <span className="nav-welcome">Welcome, {firstName || "User"}!</span>
+            <span className="nav-welcome">Welcome, {userName || "User"}!</span>
             <button onClick={handleLogout} className="nav-link logout-button">
               Logout
             </button>
