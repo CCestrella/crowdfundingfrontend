@@ -35,7 +35,11 @@ const SignUp = () => {
       await signUp(formData); 
       setSuccess("User created successfully!");
     } catch (error) {
-      setError(error.message);
+      if (error.message.includes("already exists")) {
+        setError("User already exists");
+      } else {
+        setError(error.message);
+      }
     } finally {
       setIsLoading(false); // Set loading to false after the request finishes
     }

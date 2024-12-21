@@ -16,7 +16,7 @@ async function signUp(formData) {
     });
   
     if (!response.ok) {
-      const fallbackError = `Error signing up the user`;
+      const fallbackError = `User Already Exists`;
   
       const data = await response.json().catch(() => {
         throw new Error(fallbackError);
