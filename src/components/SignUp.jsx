@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import signUp from "../api/sign-up"; // Assuming the signUp function is in an `api` folder
 import "./SignUp.css"; // Import the CSS file
 
@@ -6,8 +7,8 @@ const SignUp = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     role: "donor", // Default role is "Donor"
   });
@@ -15,6 +16,7 @@ const SignUp = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const navigate = useNavigate(); // Hook for navigation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,11 +31,13 @@ const SignUp = () => {
     setError(null);
     setSuccess(null);
     setIsLoading(true); // Set loading to true
-  
+
     try {
-      // Send formData directly
-      await signUp(formData); 
+      await signUp(formData);
       setSuccess("User created successfully!");
+      setTimeout(() => {
+        navigate("/landing"); // Redirect after 2 seconds
+      }, 2000);
     } catch (error) {
       if (error.message.includes("already exists")) {
         setError("User already exists");
@@ -60,7 +64,7 @@ const SignUp = () => {
           required
         />
         <input
-          type="text"
+          type="password"
           name="password"
           value={formData.password}
           onChange={handleChange}

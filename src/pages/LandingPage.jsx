@@ -10,7 +10,7 @@ function LandingPage() {
                 <Link to="/pledges" className="landing-button">
                     Donate
                 </Link>
-                <Link to="/athletes" className="landing-button">
+                <Link to="/athlete/new" className="landing-button">
                     Create Athlete Profile
                 </Link>
             </div>

@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage.jsx";
 import PostPledgePage from "./pages/PostPledgePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const AppLayout = () => (
   <div>
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/athletes", element: <AthleteListPage /> },
       { path: "/athlete/new", element: <PostAthletePage /> },
-      { path: "/athlete/:id", element: <AthleteInfo /> }, // Ensure proper route
+      { path: "/athlete/:id", element: <AthleteInfo /> }, 
       { path: "/login", element: <LoginPage /> },
       { path: "/pledges", element: <PostPledgePage /> },
       { path: "/users", element: <SignUpPage /> },

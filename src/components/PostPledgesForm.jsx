@@ -88,13 +88,13 @@ function PostPledgesForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Set loading to true
-
+    
         if (!selectedAthlete) {
             setError("Please select an athlete to donate to.");
             setLoading(false); // Set loading to false
             return;
         }
-
+    
         const payload = {
             amount: parseFloat(formData.amount),
             comment: formData.comment || "",
@@ -102,11 +102,7 @@ function PostPledgesForm() {
             is_fulfilled: true,
             athlete_profile: selectedAthlete.id,
         };
-
-        // Debugging athlete ID and payload
-        console.log("Selected Athlete ID:", selectedAthlete?.id);
-        console.log("Payload being sent:", payload);
-
+    
         try {
             const result = await postPledge(
                 payload.amount,
@@ -116,10 +112,16 @@ function PostPledgesForm() {
             );
             setSuccessMessage("Pledge created successfully!");
             setFormData({ amount: "", comment: "", anonymous: false });
+            setSelectedAthlete(null); // Reset selected athlete
+            setSearchQuery(""); // Reset search query
+            setFilteredAthletes([]); // Clear filtered athletes
+            setError(null); // Clear any previous errors
             setLoading(false); // Set loading to false
-            window.location.reload(); // Refresh the page
+    
+            // If you want to reload dynamically instead of full-page refresh
+            // fetchAthletes(); // Refetch athletes if necessary
         } catch (err) {
-            setError(err.message || "Failed to submit pledge.");
+            setError(err.message || "Please login as a donor.");
             alert("An error occurred. Please check the console for details.");
             console.error("Error:", err.message);
             setLoading(false); // Set loading to false

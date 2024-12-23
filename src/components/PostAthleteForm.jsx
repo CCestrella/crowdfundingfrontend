@@ -88,53 +88,120 @@ function PostAthleteForm() {
     return (
         <div>
             {successMessage && <p className="success-message">{successMessage}</p>}
-            <form className="create-athlete-form" onSubmit={handleSubmit}>
+            <form className="create-athlete-form-container" onSubmit={handleSubmit}>
                 <label htmlFor="first_name">First Name:</label>
-                <input type="text" id="first_name" value={athleteData.first_name} onChange={handleChange} required />
+                <input
+                    type="text"
+                    id="first_name"
+                    value={athleteData.first_name}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label htmlFor="last_name">Last Name:</label>
-                <input type="text" id="last_name" value={athleteData.last_name} onChange={handleChange} required />
+                <input
+                    type="text"
+                    id="last_name"
+                    value={athleteData.last_name}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label htmlFor="bio">Bio:</label>
-                <textarea id="bio" value={athleteData.bio} onChange={handleChange} required />
+                <textarea
+                    id="bio"
+                    value={athleteData.bio}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label htmlFor="age">Age:</label>
-                <input type="number" id="age" value={athleteData.age} onChange={handleChange} required />
+                <input
+                    type="number"
+                    id="age"
+                    value={athleteData.age}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label htmlFor="sport">Sport:</label>
-                <select id="sport" value={athleteData.sport} onChange={handleChange} required>
+                <select
+                    id="sport"
+                    value={athleteData.sport}
+                    onChange={handleChange}
+                    required
+                >
                     <option value="" disabled>Select a sport</option>
                     {olympicSports.map((sport) => (
-                        <option key={sport} value={sport}>{sport}</option>
+                        <option key={sport} value={sport}>
+                            {sport}
+                        </option>
                     ))}
                 </select>
 
                 <label htmlFor="goal">Goal (USD):</label>
-                <input type="number" id="goal" value={athleteData.goal} onChange={handleChange} required />
+                <input
+                    type="number"
+                    id="goal"
+                    value={athleteData.goal}
+                    onChange={handleChange}
+                    required
+                />
 
                 <label htmlFor="funds_raised">Funds Raised:</label>
-                <input type="number" id="funds_raised" value={athleteData.funds_raised} onChange={handleChange} />
+                <input
+                    type="number"
+                    id="funds_raised"
+                    value={athleteData.funds_raised}
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="is_open">Is Open:</label>
-                <select id="is_open" value={athleteData.is_open.toString()} onChange={handleChange}>
+                <select
+                    id="is_open"
+                    value={athleteData.is_open.toString()}
+                    onChange={handleChange}
+                >
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
 
                 <label htmlFor="funding_breakdown">Funding Breakdown:</label>
-                <textarea id="funding_breakdown" value={athleteData.funding_breakdown} onChange={handleChange} />
+                <textarea
+                    id="funding_breakdown"
+                    value={athleteData.funding_breakdown}
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="achievements">Achievements:</label>
-                <textarea id="achievements" value={athleteData.achievements} onChange={handleChange} />
+                <textarea
+                    id="achievements"
+                    value={athleteData.achievements}
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="image">Image URL:</label>
-                <input type="url" id="image" value={athleteData.image} onChange={handleChange} />
+                <input
+                    type="url"
+                    id="image"
+                    value={athleteData.image}
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="video">Video URL:</label>
-                <input type="url" id="video" value={athleteData.video} onChange={handleChange} />
+                <input
+                    type="url"
+                    id="video"
+                    value={athleteData.video}
+                    onChange={handleChange}
+                />
 
                 <label htmlFor="progress_updates">Progress Updates:</label>
-                <textarea id="progress_updates" value={athleteData.progress_updates} onChange={handleChange} />
+                <textarea
+                    id="progress_updates"
+                    value={athleteData.progress_updates}
+                    onChange={handleChange}
+                />
 
                 <button type="submit">Create Athlete</button>
             </form>

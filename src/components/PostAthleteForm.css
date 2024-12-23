@@ -1,58 +1,84 @@
-/* Container styling for the form, ensuring it's centered and well-spaced */
-.create-athlete-form {
+/* Main container for PostAthleteForm */
+.create-athlete-form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 80px auto; /* Centered with consistent spacing */
+    margin-top: 650px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(242, 242, 253, 0.4); /* Adjust the alpha value for transparency */
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
-    max-width: 500px;
-    margin: 90px auto;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    gap: 10px;
+    
 }
 
-/* Styling for all input fields including text areas */
-.create-athlete-form input[type="text"],
-.create-athlete-form input[type="number"],
-.create-athlete-form select,
-.create-athlete-form textarea {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
+/* Form structure for PostAthleteForm */
+.athlete-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Consistent spacing between form elements */
 }
 
-/* Specific styling for text area to handle multiple lines of text */
-.create-athlete-form textarea {
-    height: 100px;
-    resize: vertical; /* Allows the user to resize vertically */
-}
-
-/* Label styling for better readability */
-.create-athlete-form label {
-    font-size: 14px;
-    margin-bottom: 5px;
-    color: #495057;
-}
-
-/* Button styling for a more engaging user interaction */
-.create-athlete-form button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: white;
+/* Input fields for text, numbers, URLs, and textarea */
+.athlete-input,
+.athlete-textarea,
+.athlete-select {
+    padding: 10px;
     font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff;
 }
 
-.create-athlete-form button:hover {
+/* Textarea-specific styling */
+.athlete-textarea {
+    height: 80px;
+    resize: none; /* Prevent resizing */
+}
+
+/* Label styling */
+.athlete-label {
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Button styling */
+.athlete-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.athlete-button:hover {
     background-color: #0056b3;
 }
 
-/* Adding some margin to the top for the first element (usually a label or input) */
-.create-athlete-form > *:first-child {
-    margin-top: 0;
+/* Success message styling */
+.athlete-success {
+    margin-top: 10px;
+    color: green;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Error message styling */
+.athlete-error {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+    text-align: center;
 }
