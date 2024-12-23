@@ -24,7 +24,6 @@ function AthleteList() {
   }, []);
 
   const handleSendToOlympics = (athleteId) => {
-    // Navigate to the pledges page (you can append athleteId as a query param if needed)
     navigate(`/pledges?athleteId=${athleteId}`);
   };
 
@@ -49,15 +48,20 @@ function AthleteList() {
               />
               <div className="athlete-list-card-content">
                 <h3>{athlete.first_name} {athlete.last_name}</h3>
+                <p>Age: {athlete.age}</p>
                 <p>Sport: {athlete.sport}</p>
+                <p><strong>Goal (USD):</strong> ${athlete.goal || "Not specified"}</p>
+                <p><strong>Funds Raised:</strong> ${athlete.funds_raised || "0.00"}</p>
+                
               </div>
             </div>
             {/* Back Face */}
             <div className="athlete-list-card-face athlete-list-card-face--back">
-              <h3>Details</h3>
-              <p>Age: {athlete.age}</p>
-              <p>Achievements: {athlete.achievements || "None listed"}</p>
-              <p>Bio: {athlete.bio || "No bio available"}</p>
+              <h3>{athlete.first_name} {athlete.last_name}</h3>
+              <p>{athlete.bio || "No bio available"}</p>
+              <p><strong>Funding Breakdown:</strong> {athlete.funding_breakdown || "Not available"}</p>
+              <p><strong>Achievements:</strong> {athlete.achievements || "None listed"}</p>
+              <p><strong>Progress Updates:</strong> {athlete.progress_updates || "No updates available"}</p>
               <button 
                 className="send-to-olympics-button" 
                 onClick={() => handleSendToOlympics(athlete.id)}

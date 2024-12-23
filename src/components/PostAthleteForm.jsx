@@ -81,7 +81,7 @@ function PostAthleteForm() {
             navigate("/");
         } catch (error) {
             console.error("Error in handleSubmit:", error);
-            alert(error.message || "An error occurred while creating the athlete. Please try again.");
+            // alert(error.message || "An error occurred while creating the athlete. Please try again.");
         }
     };
 

@@ -12,7 +12,7 @@ function AthletePage() {
   if (error) {
     return <p>{error.message}</p>;
   }
-
+ 
   return (
     <div>
       <h2>{project.title}</h2>

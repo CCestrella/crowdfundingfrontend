@@ -32,7 +32,7 @@ async function postPledge(amount, comment, anonymous, athlete_profile_id) {
     if (!response.ok) {
         const errorData = await response.json();
         console.error("Server error:", errorData);
-        throw new Error(errorData.detail || "Failed to create pledge.");
+        throw new Error(errorData.detail || "You're currently logged in as an Athlete. To make pledges, please log in with a Donor account.");
     }
 
     return await response.json();
