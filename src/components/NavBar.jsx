@@ -8,10 +8,9 @@ function NavBar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.clear(); // Clear all local storage
     setAuth({ token: null, user: null }); // Reset auth context
-    navigate("/"); // Redirect to home
+    navigate("/login"); // Redirect to login page
   };
 
   const userName = auth.user || localStorage.getItem("user");
@@ -28,7 +27,15 @@ function NavBar() {
         <Link to="/" className="nav-link">Home</Link>
         {auth.token ? (
           <>
-            <span className="nav-welcome">Welcome, {userName || "User"}!</span>
+            {/* Welcome Message */}
+            <span
+              onClick={() => navigate("/my-athletes/")}
+              className="nav-welcome"
+              style={{ cursor: "pointer" }}
+            >
+              Welcome, {userName || "User"}!
+            </span>
+            {/* Logout Button */}
             <button onClick={handleLogout} className="nav-link logout-button">
               Logout
             </button>

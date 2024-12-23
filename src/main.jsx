@@ -12,6 +12,7 @@ import PostPledgePage from "./pages/PostPledgePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import LandingPage from "./pages/LandingPage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import UserAthletesPage from "./components/UserAthletesPage.jsx"; 
 
 const AppLayout = () => (
   <div>
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
       { path: "/users", element: <SignUpPage /> },
       { path: "/landing", element: <LandingPage /> },
       { path: "/athletes", element: <AthleteListPage /> },
-
+      
       // Protected Routes
       {
         path: "/athlete/new",
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <PostPledgePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/my-athletes", // Add the route for the logged-in user's athletes
+        element: (
+          <ProtectedRoute>
+            <UserAthletesPage />
           </ProtectedRoute>
         ),
       },
