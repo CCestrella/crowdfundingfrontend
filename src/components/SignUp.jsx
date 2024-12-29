@@ -50,7 +50,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <div className="sign-up-page-wrapper">
+      <div className="sign-up-container"></div>
       <form onSubmit={handleSubmit} className="sign-up-form">
         <h2>Sign Up</h2>
         {error && <p className="error">{error}</p>}

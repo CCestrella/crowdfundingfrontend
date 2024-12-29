@@ -2,28 +2,35 @@ const fetchAthletes = async () => {
     try {
         const token = localStorage.getItem('authToken');
         if (!token) {
-            console.error('No auth token found in localStorage.');
+            console.error('No auth token found');
             return;
         }
 
-        console.log('Token being sent:', token); // Debugging log
-
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/my-athletes/`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/my-athletes/`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Token ${token}`,
                 'Content-Type': 'application/json',
             },
         });
 
-        console.log('Response status:', response.status); // Debugging log
-
         if (!response.ok) {
-            const errorText = await response.text(); // Debug the error response
+            console.error('Fetch failed:', {
+                status: response.status,
+                statusText: response.statusText,
+                headers: response.headers,
+            });
+            const errorText = await response.text();
             throw new Error(`Error: ${response.status} - ${errorText}`);
         }
 
-        return await response.json();
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+            return await response.json();
+        } else {
+            const errorText = await response.text();
+            throw new Error(`Expected JSON, but received: ${errorText}`);
+        }
     } catch (error) {
         console.error('Fetch error:', error);
         throw error;

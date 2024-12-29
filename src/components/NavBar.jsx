@@ -13,7 +13,14 @@ function NavBar() {
     navigate("/login"); // Redirect to login page
   };
 
-  const userName = auth.user || localStorage.getItem("user");
+  // Retrieve the user's first name from auth or fallback to localStorage
+  const userName =
+    auth.user?.firstName || JSON.parse(localStorage.getItem("user"))?.firstName || "User";
+
+  console.log("Auth context in NavBar:", auth); // Debugging
+  console.log("LocalStorage user:", JSON.parse(localStorage.getItem("user"))); // Debugging
+  console.log("Resolved userName:", userName); // Debugging
+
 
   return (
     <nav className="navbar">
@@ -33,7 +40,7 @@ function NavBar() {
               className="nav-welcome"
               style={{ cursor: "pointer" }}
             >
-              Welcome, {userName || "User"}!
+              Welcome, {userName}!
             </span>
             {/* Logout Button */}
             <button onClick={handleLogout} className="nav-link logout-button">
