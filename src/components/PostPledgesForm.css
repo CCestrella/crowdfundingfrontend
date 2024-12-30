@@ -1,15 +1,17 @@
 .pledge-container {
     width: 100%;
     max-width: 400px;
-    margin: 80px 150px 0px 0px;
+    margin: 110px 450px 100px;
     padding: 20px;
     text-align: center;
-    background-color: rgba(244, 244, 249, 0.4); /* Adjust the alpha value for transparency */
+    background-color: rgba(244, 244, 249, 0.4);
+    /* Adjust the alpha value for transparency */
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    /* background-image: url('https://i.ibb.co/9hF7QxJ/h-15.png'); */
+    background-image: url('https://i.ibb.co/9hF7QxJ/h-15.png');
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .pledge-form {
     display: flex;
     flex-direction: column;
@@ -53,7 +55,7 @@
 
 .pledge-error {
     margin-top: 10px;
-    color: rgb(21, 9, 94);
+    color: rgb(11, 7, 41);
 }
 
 .pledge-success {
@@ -71,12 +73,19 @@
     list-style: none;
     padding: 0;
     margin: 10px 0;
-    max-height: 200px;
-    overflow-y: auto;
     border: 1px solid #ddd;
+    /* Optional for styling */
     border-radius: 5px;
+    /* Optional for styling */
     background-color: #fff;
+    /* Optional for styling */
+    /* max-width: 100%; */
+    /* Prevent horizontal overflow */
+    overflow: hidden;
+    /* Remove scrollbars entirely */
+    max-height: 1200px;
 }
+
 
 .athlete-item {
     padding: 10px;
@@ -115,7 +124,7 @@
     list-style: none;
     padding: 0;
     margin: 10px 0;
-    max-height: 200px;
+    /* max-height: 200px; */
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 5px;

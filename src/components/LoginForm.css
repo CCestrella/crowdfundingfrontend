@@ -1,5 +1,4 @@
-/* Wrapper for the login page */
-.login-page-wrapper {
+.wrapper {
   height: 100vh;
   display: flex;
   align-items: center;
@@ -11,7 +10,6 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Form container */
 .form-container {
   display: flex;
   max-width: 80%;
@@ -22,7 +20,6 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Text section styling */
 .form-container__text {
   flex: 1;
   padding: 20px;
@@ -40,7 +37,6 @@
   line-height: 1.5;
 }
 
-/* Login form styling */
 .login-page {
   flex: 1;
   padding: 20px;

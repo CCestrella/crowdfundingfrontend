@@ -31,7 +31,7 @@ function PostPledgesForm() {
     useEffect(() => {
         const fetchAthletes = async () => {
             try {
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/athletes/`);
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/athletes/`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch athletes");
                 }
@@ -88,13 +88,13 @@ function PostPledgesForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true); // Set loading to true
-    
+
         if (!selectedAthlete) {
             setError("Please select an athlete to donate to.");
             setLoading(false); // Set loading to false
             return;
         }
-    
+
         const payload = {
             amount: parseFloat(formData.amount),
             comment: formData.comment || "",
@@ -102,7 +102,7 @@ function PostPledgesForm() {
             is_fulfilled: true,
             athlete_profile: selectedAthlete.id,
         };
-    
+
         try {
             const result = await postPledge(
                 payload.amount,
@@ -117,7 +117,7 @@ function PostPledgesForm() {
             setFilteredAthletes([]); // Clear filtered athletes
             setError(null); // Clear any previous errors
             setLoading(false); // Set loading to false
-    
+
             // If you want to reload dynamically instead of full-page refresh
             // fetchAthletes(); // Refetch athletes if necessary
         } catch (err) {

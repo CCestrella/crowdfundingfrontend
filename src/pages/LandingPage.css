@@ -59,3 +59,20 @@
 .landing-button:hover {
     background-color: #c24528;
 }
+
+
+.see-all-athletes-button {
+  background-color: #0288d1;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s;
+}
+
+.see-all-athletes-button:hover {
+  background-color: #02669d;
+}

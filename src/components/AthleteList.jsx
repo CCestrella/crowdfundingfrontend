@@ -10,7 +10,7 @@ function AthleteList() {
   useEffect(() => {
     const fetchAthletes = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/athletes/`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/athletes/`);
         if (!response.ok) throw new Error("Failed to fetch athletes");
         const data = await response.json();
         setAthletes(data);

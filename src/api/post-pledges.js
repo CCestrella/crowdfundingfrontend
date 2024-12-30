@@ -5,7 +5,7 @@ async function postPledge(amount, comment, anonymous, athlete_profile_id) {
         throw new Error("Authentication token is missing. Please log in.");
     }
 
-    const url = `${import.meta.env.VITE_API_URL}/pledges/`;
+    const url = `${import.meta.env.VITE_API_URL}/api/pledges/`;
     console.log("Payload:", {
         amount: amount,
         comment: comment || "",

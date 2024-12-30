@@ -1,5 +1,5 @@
 .sign-up-page-wrapper {
-    height: 100vh;
+    min-height: 100vh; /* Ensure full viewport height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,24 +10,24 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.sign-up-container {
+/* .sign-up-container {
     display: flex;
     flex-direction: column;
-    max-width: 80%;
-    width: 800px;
-    background-color: rgba(255, 255, 255, 0.8);
+    width: 90%; /* Adjust for responsiveness */
+    /* max-width: 600px; /* Constrain to a reasonable width */
+    /* background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    padding: 50px;
-    margin-top: 50px;
-}
+    padding: 2rem;
+    margin-top: 0; Remove unnecessary margin */
+
 
 .sign-up-form h2 {
     text-align: center;
     font-size: 1.8em;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #333;
+    margin: 10px 15px 10px;
 }
 
 .sign-up-form {
@@ -39,7 +39,7 @@
 .sign-up-form input,
 .sign-up-form select {
     width: 100%;
-    padding: 10px;
+    padding: 12px; /* Slightly larger padding */
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1em;
@@ -47,7 +47,7 @@
 
 .sign-up-form button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
     background-color: #057f94;
@@ -58,7 +58,7 @@
 }
 
 .sign-up-form button:hover {
-    background-color: #c24528;
+    background-color: #045a70; /* Subtle hover effect */
 }
 
 .sign-up-form label {
@@ -81,9 +81,7 @@
 /* Mobile Styles */
 @media (max-width: 600px) {
     .sign-up-container {
-        width: 90%;
-        margin-top: 50px;
-        padding: 15px;
+        padding: 1.5rem;
     }
 
     .sign-up-form h2 {
@@ -94,7 +92,7 @@
     .sign-up-form select,
     .sign-up-form button {
         font-size: 0.9em;
-        padding: 8px;
+        padding: 10px;
     }
 
     .sign-up-form label {

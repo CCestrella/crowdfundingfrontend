@@ -8,7 +8,7 @@ const postAthlete = async (payload) => {
     return;
   }
 
-  const url = `${import.meta.env.VITE_API_URL}/athlete/new/`;
+  const url = `${import.meta.env.VITE_API_URL}/api/athlete/new/`;
 
   try {
     const response = await fetch(url, {

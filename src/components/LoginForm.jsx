@@ -1,3 +1,9 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import postLogin from "../api/post-login.js";
+import { useAuth } from "../hooks/use-auth.jsx";
+import "./LoginForm.css";
+
 function LoginForm() {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
@@ -24,18 +30,24 @@ function LoginForm() {
       postLogin(credentials.username, credentials.password)
         .then((response) => {
           console.log("API Response:", response);
-          const { token, first_name } = response;
 
+          const { token, first_name } = response;
           if (!first_name) {
             console.error("API did not return first_name. Response:", response);
             setError("Login failed: Missing first name.");
             return;
           }
 
+          // Save to localStorage
           const user = { firstName: first_name };
           localStorage.setItem("authToken", token);
           localStorage.setItem("user", JSON.stringify(user));
-          setAuth({ token, user });
+
+          // Update auth context
+          setAuth({
+            token,
+            user,
+          });
 
           navigate("/landing");
         })
@@ -47,7 +59,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="login-page-wrapper">
+    <div className="wrapper">
       <div className="form-container">
         <div className="form-container__text">
           <h1>Welcome to Champs Fund</h1>

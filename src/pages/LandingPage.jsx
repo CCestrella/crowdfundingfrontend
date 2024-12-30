@@ -14,6 +14,9 @@ function LandingPage() {
                     <Link to="/athlete/new" className="landing-button">
                         Create Athlete Profile
                     </Link>
+                    <Link to="/athletes" className="landing-button">
+                        See All Athletes
+                    </Link>
                 </div>
             </div>
         </div>

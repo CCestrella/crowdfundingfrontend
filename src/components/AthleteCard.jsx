@@ -1,7 +1,6 @@
-import React, { useState } from 'react'; // Correctly import React and hooks
-import './AthleteCard.css';
-import { Link } from 'react-router-dom';
-import allAthletes from '../data'; // Import the athlete data array
+import React, { useState } from "react";
+import "./AthleteCard.css";
+import { Link } from "react-router-dom";
 
 const AthleteCard = ({ athleteData }) => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -10,19 +9,16 @@ const AthleteCard = ({ athleteData }) => {
         setIsFlipped(!isFlipped);
     };
 
-    // Fetch the specific athlete details by ID from allAthletes
-    const athleteDetails = allAthletes.find(athlete => athlete.id === athleteData.id);
-
     return (
         <div
-            className={`athlete-card ${isFlipped ? 'is-flipped' : ''}`}
+            className={`athlete-card ${isFlipped ? "is-flipped" : ""}`}
             onClick={handleFlip}
         >
             <div className="athlete-card-inner">
                 {/* Front Face */}
                 <div className="athlete-card__face athlete-card__face--front">
                     <img
-                        src={athleteData.image}
+                        src={athleteData.image || "https://via.placeholder.com/280x180"}
                         alt={`${athleteData.first_name} ${athleteData.last_name}`}
                     />
                     <div className="athlete-card-content">
@@ -37,17 +33,15 @@ const AthleteCard = ({ athleteData }) => {
 
                 {/* Back Face */}
                 <div className="athlete-card__face athlete-card__face--back">
-                    {athleteDetails && (
-                        <div>
-                            <h3>{athleteDetails.first_name} {athleteDetails.last_name}</h3>
-                            <p>Bio: {athleteDetails.bio}</p>
-                            <p>Achievements: {athleteDetails.achievements}</p>
-                            <p>Funds Raised: ${athleteDetails.funds_raised}</p>
-                            <p>Goal: ${athleteDetails.goal}</p>
-                            <p>Funding Breakdown: {athleteDetails.funding_breakdown}</p>
-                            <p>Progress Updates: {athleteDetails.progress_updates}</p>
-                        </div>
-                    )}
+                    <div>
+                        <h3>{athleteData.first_name} {athleteData.last_name}</h3>
+                        <p>Bio: {athleteData.bio || "No bio available"}</p>
+                        <p>Achievements: {athleteData.achievements || "None listed"}</p>
+                        <p>Funds Raised: ${athleteData.funds_raised || "0.00"}</p>
+                        <p>Goal: ${athleteData.goal}</p>
+                        <p>Funding Breakdown: {athleteData.funding_breakdown || "Not available"}</p>
+                        <p>Progress Updates: {athleteData.progress_updates || "No updates available"}</p>
+                    </div>
                 </div>
             </div>
         </div>
