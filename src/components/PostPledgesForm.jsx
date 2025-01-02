@@ -1,33 +1,37 @@
-import React, { useState, useEffect } from "react"; // Import React once with hooks
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "./PostPledgesForm.css"; // Import the CSS file
-import postPledge from "../api/post-pledges"; // Import the postPledge function
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import "./PostPledgesForm.css";
+import postPledge from "../api/post-pledges";
 
 function PostPledgesForm() {
-    const [athletes, setAthletes] = useState([]); // List of athletes
-    const [filteredAthletes, setFilteredAthletes] = useState([]); // Filtered list based on search
-    const [selectedAthlete, setSelectedAthlete] = useState(null); // Selected athlete
+    const [athletes, setAthletes] = useState([]);
+    const [filteredAthletes, setFilteredAthletes] = useState([]);
+    const [selectedAthlete, setSelectedAthlete] = useState(null);
     const [formData, setFormData] = useState({
         amount: "",
         comment: "",
         anonymous: false,
     });
-    const [searchQuery, setSearchQuery] = useState(""); // For the search bar
+    const [searchQuery, setSearchQuery] = useState("");
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState("");
-    const [loading, setLoading] = useState(false); // Loading state
-    const navigate = useNavigate(); // Hook for navigation
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
 
-    // Authentication Check
     useEffect(() => {
         const token = localStorage.getItem("authToken");
+
+        // Check for the role of the user from local storage or make an API call
+        const userRole = localStorage.getItem("userRole"); // Assume userRole is stored after login
         if (!token) {
             alert("You must be logged in to create a pledge.");
-            navigate("/login"); // Redirect to login page
+            navigate("/login");
+        } else if (userRole === "athlete") {
+            setError("Please log in as a donor to make donations.");
         }
     }, [navigate]);
 
-    // Fetch athletes from the API
     useEffect(() => {
         const fetchAthletes = async () => {
             try {
@@ -36,21 +40,28 @@ function PostPledgesForm() {
                     throw new Error("Failed to fetch athletes");
                 }
                 const data = await response.json();
-                setAthletes(data); // Save the list of athletes
+                setAthletes(data);
+
+                const athleteId = searchParams.get("athleteId");
+                if (athleteId) {
+                    const selected = data.find((athlete) => athlete.id === parseInt(athleteId));
+                    if (selected) {
+                        setSelectedAthlete(selected);
+                    }
+                }
             } catch (err) {
                 console.error(err);
-                setError("Unable to load athletes");
+                setError("Unable to load athletes. Please try again later.");
             }
         };
 
         fetchAthletes();
-    }, []);
+    }, [searchParams]);
 
     const handleSearchChange = (e) => {
         const query = e.target.value;
         setSearchQuery(query);
 
-        // Dynamically filter athletes as the user types
         if (query.trim() === "") {
             setFilteredAthletes([]);
         } else {
@@ -64,7 +75,6 @@ function PostPledgesForm() {
     };
 
     const handleReset = () => {
-        // Reset the form and athlete selection
         setSearchQuery("");
         setFilteredAthletes([]);
         setSelectedAthlete(null);
@@ -87,11 +97,11 @@ function PostPledgesForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // Set loading to true
+        setLoading(true);
 
         if (!selectedAthlete) {
             setError("Please select an athlete to donate to.");
-            setLoading(false); // Set loading to false
+            setLoading(false);
             return;
         }
 
@@ -110,21 +120,22 @@ function PostPledgesForm() {
                 payload.anonymous,
                 payload.athlete_profile
             );
-            setSuccessMessage("Pledge created successfully!");
-            setFormData({ amount: "", comment: "", anonymous: false });
-            setSelectedAthlete(null); // Reset selected athlete
-            setSearchQuery(""); // Reset search query
-            setFilteredAthletes([]); // Clear filtered athletes
-            setError(null); // Clear any previous errors
-            setLoading(false); // Set loading to false
-
-            // If you want to reload dynamically instead of full-page refresh
-            // fetchAthletes(); // Refetch athletes if necessary
+            console.log("Pledge created successfully:", result);
+            setSuccessMessage(
+                `Thank you for your donation of $${payload.amount.toFixed(2)} to ${selectedAthlete.first_name} ${selectedAthlete.last_name}!`
+            );
+            handleReset();
         } catch (err) {
-            setError(err.message || "Please login as a donor.");
-            alert("An error occurred. Please check the console for details.");
-            console.error("Error:", err.message);
-            setLoading(false); // Set loading to false
+            if (err.message.includes("Failed to create pledge")) {
+                setError("Unable to create your pledge. Please ensure all fields are correctly filled.");
+            } else if (err.message.includes("NetworkError")) {
+                setError("Network error. Please check your internet connection.");
+            } else {
+                setError(err.message || "An unexpected error occurred.");
+            }
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -134,87 +145,91 @@ function PostPledgesForm() {
 
             {error && <p className="pledge-error">{error}</p>}
             {successMessage && <p className="pledge-success">{successMessage}</p>}
-            {loading && <p className="pledge-loading">Submitting your pledge...</p>} {/* Loading message */}
+            {loading && <p className="pledge-loading">Submitting your pledge...</p>}
 
-            <div className="athlete-search">
-                <input
-                    type="text"
-                    placeholder="Search for an athlete"
-                    value={searchQuery}
-                    onChange={handleSearchChange}
-                    className="pledge-input"
-                />
-                {filteredAthletes.length > 0 && (
-                    <ul className="athlete-list">
-                        {filteredAthletes.map((athlete) => (
-                            <li
-                                key={athlete.id}
-                                className={`athlete-item ${selectedAthlete?.id === athlete.id ? "selected" : ""
-                                    }`}
-                                onClick={() => setSelectedAthlete(athlete)}
-                            >
-                                {athlete.first_name} {athlete.last_name} - {athlete.bio}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
+            {!error && (
+                <>
+                    <div className="athlete-search">
+                        <input
+                            type="text"
+                            placeholder="Search for an athlete"
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                            className="pledge-input"
+                        />
+                        {filteredAthletes.length > 0 && (
+                            <ul className="athlete-list">
+                                {filteredAthletes.map((athlete) => (
+                                    <li
+                                        key={athlete.id}
+                                        className={`athlete-item ${selectedAthlete?.id === athlete.id ? "selected" : ""
+                                            }`}
+                                        onClick={() => setSelectedAthlete(athlete)}
+                                    >
+                                        {athlete.first_name} {athlete.last_name} - {athlete.bio}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
 
-            {selectedAthlete && (
-                <p>
-                    Selected Athlete:{" "}
-                    <strong>
-                        {selectedAthlete.first_name} {selectedAthlete.last_name}
-                    </strong>
-                </p>
+                    {selectedAthlete && (
+                        <p>
+                            Selected Athlete:{" "}
+                            <strong>
+                                {selectedAthlete.first_name} {selectedAthlete.last_name}
+                            </strong>
+                        </p>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="pledge-form">
+                        <div>
+                            <label htmlFor="amount">Amount ($):</label>
+                            <input
+                                type="number"
+                                id="amount"
+                                name="amount"
+                                value={formData.amount}
+                                onChange={handleChange}
+                                required
+                                min="1"
+                                step="0.01"
+                                className="pledge-input"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="comment">Comment (Optional):</label>
+                            <textarea
+                                id="comment"
+                                name="comment"
+                                value={formData.comment}
+                                onChange={handleChange}
+                                placeholder="Add a comment"
+                                className="pledge-textarea"
+                            />
+                        </div>
+
+                        <div className="pledge-checkbox">
+                            <input
+                                type="checkbox"
+                                id="anonymous"
+                                name="anonymous"
+                                checked={formData.anonymous}
+                                onChange={handleChange}
+                            />
+                            <label htmlFor="anonymous">Donate Anonymously</label>
+                        </div>
+
+                        <button type="submit" className="pledge-button" disabled={loading}>
+                            Submit Pledge
+                        </button>
+                        <button type="button" className="pledge-reset-button" onClick={handleReset}>
+                            Reset
+                        </button>
+                    </form>
+                </>
             )}
-
-            <form onSubmit={handleSubmit} className="pledge-form">
-                <div>
-                    <label htmlFor="amount">Amount ($):</label>
-                    <input
-                        type="number"
-                        id="amount"
-                        name="amount"
-                        value={formData.amount}
-                        onChange={handleChange}
-                        required
-                        min="1"
-                        step="0.01"
-                        className="pledge-input"
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="comment">Comment (Optional):</label>
-                    <textarea
-                        id="comment"
-                        name="comment"
-                        value={formData.comment}
-                        onChange={handleChange}
-                        placeholder="Add a comment"
-                        className="pledge-textarea"
-                    />
-                </div>
-
-                <div className="pledge-checkbox">
-                    <input
-                        type="checkbox"
-                        id="anonymous"
-                        name="anonymous"
-                        checked={formData.anonymous}
-                        onChange={handleChange}
-                    />
-                    <label htmlFor="anonymous">Donate Anonymously</label>
-                </div>
-
-                <button type="submit" className="pledge-button" disabled={loading}>
-                    Submit Pledge
-                </button>
-                <button type="button" className="pledge-reset-button" onClick={handleReset}>
-                    Reset
-                </button>
-            </form>
         </div>
     );
 }
