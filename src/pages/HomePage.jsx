@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import "./HomePage.css";
 import AthleteCard from "../components/AthleteCard";
@@ -7,7 +8,16 @@ import athletes from "../data";
 import { useAuth } from "../components/AuthProvider";
 
 const HomePage = () => {
-  const { auth, logout } = useAuth();
+  const { auth } = useAuth();
+  const navigate = useNavigate();
+
+  const handleDonateNow = () => {
+    if (auth.token) {
+      navigate("/landing"); // Navigate to /landing if the user is logged in
+    } else {
+      navigate("/login"); // Navigate to /login if the user is not logged in
+    }
+  };
 
   return (
     <div>
@@ -53,7 +63,7 @@ const HomePage = () => {
 
         {/* Call to Action Button */}
         <div className="button-container">
-          <button className="button">
+          <button className="button" onClick={handleDonateNow}>
             <strong>
               <small>Donate Now</small>
             </strong>

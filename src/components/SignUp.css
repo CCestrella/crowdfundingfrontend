@@ -50,7 +50,7 @@
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #057f94;
+    background-color: #00507d;
     color: #fff;
     font-size: 1em;
     cursor: pointer;
@@ -58,7 +58,7 @@
 }
 
 .sign-up-form button:hover {
-    background-color: #045a70; /* Subtle hover effect */
+    background-color: #c24528; /* Subtle hover effect */
 }
 
 .sign-up-form label {

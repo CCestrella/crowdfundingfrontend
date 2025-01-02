@@ -1,9 +1,11 @@
-import './UserAthletesPage.css';
+import './UserAthletes.css';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const UserAthletesPage = () => {
-  const [athletes, setAthletes] = useState([]); // Initialize athletes
+  const [athletes, setAthletes] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Initialize navigate hook
 
   const fetchUserAthletes = async () => {
     const token = localStorage.getItem('authToken');
@@ -28,51 +30,37 @@ const UserAthletesPage = () => {
   const handleEditProgress = async (athlete) => {
     const newProgress = prompt(
       `Edit progress for ${athlete.first_name} ${athlete.last_name}`,
-      athlete.progress_updates || ''
+      athlete.progress_updates || ""
     );
     if (newProgress) {
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/api/athletes/${athlete.id}/`, {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            Authorization: `Token ${localStorage.getItem('authToken')}`,
-            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem("authToken")}`,
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ progress_updates: newProgress }),
+          body: JSON.stringify({ progress_updates: newProgress }), // Ensure this field is included
         });
 
         if (!response.ok) {
-          throw new Error('Failed to update progress');
+          throw new Error("Failed to update progress");
         }
 
         const updatedAthlete = await response.json();
         setAthletes((prev) =>
           prev.map((a) => (a.id === updatedAthlete.id ? updatedAthlete : a))
         );
-        alert('Progress updated successfully!');
+        alert("Progress updated successfully!");
       } catch (error) {
-        console.error('Failed to update progress:', error);
-        alert('Failed to update progress');
+        console.error("Failed to update progress:", error);
+        alert("Failed to update progress");
       }
     }
   };
 
-  const handleDelete = (athleteId) => {
-    if (window.confirm('Are you sure you want to delete this athlete?')) {
-      fetch(`${import.meta.env.VITE_API_URL}/api/my-athletes/${athleteId}/`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: `Token ${localStorage.getItem('authToken')}`,
-        },
-      })
-        .then(() => {
-          setAthletes((prev) => prev.filter((a) => a.id !== athleteId));
-        })
-        .catch((err) => {
-          setError('Failed to delete athlete. Please try again.');
-          console.error(err);
-        });
-    }
+  const handleNavigate = () => {
+    navigate("/landing");
   };
 
   if (error) return <h2>{error}</h2>;
@@ -89,7 +77,7 @@ const UserAthletesPage = () => {
                 <h2>
                   {athlete.first_name} {athlete.last_name}
                 </h2>
-                
+
                 <p><strong>Age:</strong> {athlete.age}</p>
                 <p><strong>Sport:</strong> {athlete.sport}</p>
                 <p><strong>Goal (USD):</strong> ${athlete.goal || 'Not specified'}</p>
@@ -110,14 +98,16 @@ const UserAthletesPage = () => {
                   <button onClick={() => handleEditProgress(athlete)} className="edit-button">
                     Edit Progress
                   </button>
-                  <button onClick={() => handleDelete(athlete.id)} className="delete-button">
-                    Delete
-                  </button>
                 </div>
               </div>
             </li>
           ))}
         </ul>
+        <div className="bottom-buttons">
+          <button className="cta-button" onClick={handleNavigate}>
+            Make a Difference Today
+          </button>
+        </div>
       </div>
     </div>
   );

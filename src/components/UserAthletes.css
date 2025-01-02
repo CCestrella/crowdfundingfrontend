@@ -1,0 +1,111 @@
+/* Wrapper to center content and manage layout */
+.wrapper2 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Ensures it spans the full viewport height */
+  justify-content: center;
+  /* Center content vertically */
+  align-items: center;
+  /* Center content horizontally */
+  background-color: #f4f4f9;
+  /* Light background color */
+  padding: 2rem;
+  box-sizing: border-box;
+  margin-top: 80px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+/* Athlete list styles */
+.athlete-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  /* Removed max-height to allow content to grow naturally */
+}
+
+.athlete-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 320px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.athlete-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.edit-button,
+.delete-button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+/* Base styles for CTA button */
+.cta-button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #00507d;
+  /* Blue color */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin: 10px 280px;
+}
+
+.cta-button:hover {
+  background-color: #003f5c;
+  /* Darker blue on hover */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .cta-button {
+    padding: 15px 30px;
+    /* Keeps the same styles as above */
+    font-size: 1rem;
+    /* Slightly smaller font size */
+  }
+}
