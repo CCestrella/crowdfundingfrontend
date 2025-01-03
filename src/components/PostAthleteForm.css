@@ -2,25 +2,28 @@
 .create-athlete-form-container {
     width: 100%;
     max-width: 400px;
-    margin: 80px auto; /* Centered with consistent spacing */
+    margin: 80px auto;
+    /* Centered with consistent spacing */
     margin-top: 150px;
     padding: 20px;
     text-align: center;
-    background-color: rgba(242, 242, 253, 0.4); /* Adjust the alpha value for transparency */
+    background-color: rgba(242, 242, 253, 0.4);
+    /* Adjust the alpha value for transparency */
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
+    background-image: url(https://i.ibb.co/T4SwLHY/h-16.png);
 }
 
 /* Form structure for PostAthleteForm */
 .athlete-form {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Consistent spacing between form elements */
+    gap: 10px;
+    /* Consistent spacing between form elements */
 }
 
 /* Input fields for text, numbers, URLs, and textarea */
@@ -39,7 +42,8 @@
 /* Textarea-specific styling */
 .athlete-textarea {
     height: 80px;
-    resize: none; /* Prevent resizing */
+    resize: none;
+    /* Prevent resizing */
 }
 
 /* Label styling */
