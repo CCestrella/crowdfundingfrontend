@@ -1,15 +1,15 @@
 .pledge-container {
     width: 100%;
-    max-width: 400px;
-    margin: 110px 450px 100px;
+    max-width: 600px;
+    margin: 0 auto;
     padding: 20px;
     text-align: center;
-    background-color: rgba(244, 244, 249, 0.4);
-    /* Adjust the alpha value for transparency */
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-image: url('https://i.ibb.co/9hF7QxJ/h-15.png');
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
 }
 
 .pledge-form {
@@ -23,11 +23,12 @@
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     width: 100%;
     resize: none;
     /* Prevents resizing for textarea */
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .pledge-checkbox {
@@ -36,10 +37,11 @@
     gap: 8px;
     font-size: 14px;
     color: #f1f1f1;
+    margin-bottom: 20px;
 }
 
 .pledge-button {
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 16px;
     background-color: #007bff;
     color: #fff;
@@ -55,12 +57,26 @@
 
 .pledge-error {
     margin-top: 10px;
-    color: rgb(11, 7, 41);
+    color: #ff4d4d;
+    /* Red color for error */
+    background-color: #ffe6e6;
+    /* Light red background */
+    padding: 10px;
+    border: 1px solid #ff4d4d;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .pledge-success {
     margin-top: 10px;
-    color: green;
+    color: #4caf50;
+    /* Green color for success */
+    background-color: #e8f5e9;
+    /* Light green background */
+    padding: 10px;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 .athlete-search {
@@ -105,19 +121,20 @@
 
 .pledge-reset-button {
     margin-top: 10px;
-    padding: 10px;
+    padding: 10px 20px;
     font-size: 16px;
-    background-color: #dc3545;
+    background-color: #f44336;
     /* Red for reset */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-left: 10px;
 }
 
 .pledge-reset-button:hover {
-    background-color: #c82333;
+    background-color: #d32f2f;
 }
 
 .athlete-list {
@@ -160,4 +177,34 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: center;
+}
+
+.pledge-loading {
+    color: #007bff;
+    /* Blue color for loading */
+    background-color: #e7f3ff;
+    /* Light blue background */
+    padding: 10px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.thank-you-note {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e8f5e9;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.thank-you-note h2 {
+    margin: 0 0 10px;
+    color: #4caf50;
+}
+
+.thank-you-note p {
+    margin: 0;
+    color: #333;
 }
